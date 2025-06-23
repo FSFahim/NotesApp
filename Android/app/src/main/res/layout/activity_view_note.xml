@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/viewNoteHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View Note"
+        android:textSize="24sp"
+        android:textColor="@color/navy"
+        android:fontFamily="@font/poppins"
+        android:layout_marginTop="50dp" />
+
+    <TextView
+        android:id="@+id/viewTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:padding="12dp"
+        android:textSize="20sp"
+        android:layout_below="@id/viewNoteHeading"
+        android:background="@drawable/navy_border"
+        android:layout_marginTop="16dp"
+        android:maxLines="1"
+        android:fontFamily="@font/poppins"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/viewContentTextView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="top"
+        android:padding="12dp"
+        android:textSize="18sp"
+        android:fontFamily="@font/poppins"
+        android:background="@drawable/navy_border"
+        android:layout_below="@id/viewTitleTextView"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="50dp"/>
+
+</RelativeLayout>

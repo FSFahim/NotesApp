@@ -1,0 +1,15 @@
+# === ANDROID ===
+*.iml
+.gradle/
+.idea/
+build/
+local.properties
+.DS_Store
+
+# Keystore (if any)
+*.jks
+
+# === NODE.JS ===
+node_modules/
+.env
+npm-debug.log
