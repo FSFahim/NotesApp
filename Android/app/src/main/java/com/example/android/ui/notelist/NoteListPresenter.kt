@@ -1,15 +1,15 @@
-package com.example.android.ui.main
+package com.example.android.ui.notelist
 
-import com.example.android.model.Note
 import com.example.android.data.NotesRepository
+import com.example.android.model.Note
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainPresenter(
-    private var view: MainContract.View?,
+class NoteListPresenter(
+    private var view: NoteListContract.View?,
     private val repository: NotesRepository
-) : MainContract.Presenter {
+) : NoteListContract.Presenter {
 
     override fun deleteNote(note: Note) {
         note.id?.let { id ->

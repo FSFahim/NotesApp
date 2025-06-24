@@ -1,8 +1,8 @@
-package com.example.android.ui.main
+package com.example.android.ui.notelist
 
 import com.example.android.model.Note
 
-interface MainContract {
+interface NoteListContract {
     interface View {
         fun showNotes(notes: List<Note>)
         fun showError(message: String)

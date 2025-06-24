@@ -16,15 +16,6 @@
         android:theme="@style/Theme.Android"
         tools:targetApi="31">
         <activity
-            android:name=".ui.view.ViewNoteActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.update.UpdateNoteActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.add.AddNoteActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
