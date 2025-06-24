@@ -1,16 +1,15 @@
-package com.example.android.ui.main
+package com.example.android.ui.add
 
 import com.example.android.model.Note
 
-interface MainContract {
+interface AddNoteContract {
     interface View {
-        fun showNotes(notes: List<Note>)
+        fun showSuccess()
         fun showError(message: String)
     }
 
     interface Presenter {
-        fun loadNotes()
+        fun saveNote(note: Note)
         fun onDestroy()
-        fun deleteNote(note: Note)
     }
 }

@@ -11,6 +11,24 @@ class MainPresenter(
     private val repository: NotesRepository
 ) : MainContract.Presenter {
 
+    override fun deleteNote(note: Note) {
+        note.id?.let { id ->
+            repository.deleteNoteById(id).enqueue(object : Callback<Void> {
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    if (response.isSuccessful) {
+                        loadNotes()
+                    } else {
+                        view?.showError("Delete failed")
+                    }
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    view?.showError("Error: ${t.localizedMessage}")
+                }
+            })
+        }
+    }
+
     override fun loadNotes() {
         repository.getAllNotes().enqueue(object : Callback<List<Note>> {
             override fun onResponse(call: Call<List<Note>>, response: Response<List<Note>>) {

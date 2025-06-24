@@ -1,5 +1,6 @@
-package com.example.android
+package com.example.android.data.remote
 
+import com.example.android.data.remote.NotesApiService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

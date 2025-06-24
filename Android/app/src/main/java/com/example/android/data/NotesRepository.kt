@@ -1,6 +1,6 @@
 package com.example.android.data
 
-import com.example.android.ApiClient
+import com.example.android.data.remote.ApiClient
 import com.example.android.model.Note
 import retrofit2.Call
 
@@ -18,5 +18,12 @@ class NotesRepository {
         return ApiClient.notesService.getNoteById(id)
     }
 
-    // Optional: addNote(), updateNote()...
+    fun addNote(note: Note): Call<Void> {
+        return ApiClient.notesService.addNote(note)
+    }
+
+    fun updateNote(id: Int, note: Note): Call<Void> {
+        return ApiClient.notesService.updateNote(id, note)
+    }
+
 }

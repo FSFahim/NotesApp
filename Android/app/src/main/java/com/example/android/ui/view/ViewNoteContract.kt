@@ -1,16 +1,16 @@
-package com.example.android.ui.main
+package com.example.android.ui.view
 
 import com.example.android.model.Note
 
-interface MainContract {
+interface ViewNoteContract {
     interface View {
-        fun showNotes(notes: List<Note>)
+        fun showNote(note: Note)
         fun showError(message: String)
+        fun close()
     }
 
     interface Presenter {
-        fun loadNotes()
+        fun loadNote(id: Int)
         fun onDestroy()
-        fun deleteNote(note: Note)
     }
 }
