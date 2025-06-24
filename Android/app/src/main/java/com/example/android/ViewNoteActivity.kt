@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.android.databinding.ActivityViewNoteBinding
+import com.example.android.model.Note
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
