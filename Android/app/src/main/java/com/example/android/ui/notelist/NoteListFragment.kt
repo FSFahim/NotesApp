@@ -6,16 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.android.R
 import com.example.android.data.NotesRepository
 import com.example.android.databinding.FragmentNoteListBinding
 import com.example.android.model.Note
 import com.example.android.ui.adapter.NoteItemListener
 import com.example.android.ui.adapter.NotesAdapter
-import com.example.android.ui.add.AddNoteFragment
-import com.example.android.ui.update.UpdateNoteFragment
-import com.example.android.ui.view.ViewNoteFragment
 
 class NoteListFragment : Fragment(), NoteListContract.View, NoteItemListener {
 
@@ -43,10 +40,9 @@ class NoteListFragment : Fragment(), NoteListContract.View, NoteItemListener {
         binding.notesRecyclerView.adapter = notesAdapter
 
         binding.addButton.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainerView, AddNoteFragment())
-                .addToBackStack(null)
-                .commit()
+            findNavController().navigate(
+                NoteListFragmentDirections.actionNoteListFragmentToAddNoteFragment()
+            )
         }
 
         presenter.loadNotes()
@@ -72,30 +68,23 @@ class NoteListFragment : Fragment(), NoteListContract.View, NoteItemListener {
     }
 
     override fun onNoteClicked(note: Note) {
-        val fragment = ViewNoteFragment().apply {
-            arguments = Bundle().apply {
-                putInt("note_id", note.id ?: -1)
-            }
-        }
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainerView, fragment)
-            .addToBackStack(null)
-            .commit()
+        val action = NoteListFragmentDirections
+            .actionNoteListFragmentToViewNoteFragment(note.id!!)
+        findNavController().navigate(action)
     }
 
     override fun onNoteEditRequested(note: Note) {
-        val fragment = UpdateNoteFragment().apply {
-            arguments = Bundle().apply {
-                putInt("note_id", note.id ?: -1)
-            }
-        }
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainerView, fragment)
-            .addToBackStack(null)
-            .commit()
+        val action = NoteListFragmentDirections
+            .actionNoteListFragmentToUpdateNoteFragment(note.id!!)
+        findNavController().navigate(action)
     }
 
     override fun onNoteDeleteRequested(note: Note) {
         presenter.deleteNote(note)
+    }
+
+    override fun showSuccess() {
+        Toast.makeText(requireContext(), "Note Deleted", Toast.LENGTH_SHORT).show()
+        findNavController().navigateUp()
     }
 }

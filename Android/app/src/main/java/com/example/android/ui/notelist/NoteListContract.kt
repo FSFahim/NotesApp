@@ -6,6 +6,7 @@ interface NoteListContract {
     interface View {
         fun showNotes(notes: List<Note>)
         fun showError(message: String)
+        fun showSuccess()
     }
 
     interface Presenter {

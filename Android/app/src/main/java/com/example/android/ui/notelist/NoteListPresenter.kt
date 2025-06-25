@@ -16,6 +16,7 @@ class NoteListPresenter(
             repository.deleteNoteById(id).enqueue(object : Callback<Void> {
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
                     if (response.isSuccessful) {
+                        view?.showSuccess()
                         loadNotes()
                     } else {
                         view?.showError("Delete failed")
