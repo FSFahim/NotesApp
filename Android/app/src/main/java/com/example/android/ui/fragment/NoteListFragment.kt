@@ -1,4 +1,4 @@
-package com.example.android.ui.fragment.notelist
+package com.example.android.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,20 +6,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.android.data.repositroy.NotesRepository
-import com.example.android.databinding.FragmentNoteListBinding
 import com.example.android.data.model.Note
+import com.example.android.databinding.FragmentNoteListBinding
 import com.example.android.ui.adapter.NoteItemListener
 import com.example.android.ui.adapter.NotesAdapter
+import com.example.android.ui.fragment.notelist.NoteListFragmentDirections
+import com.example.android.ui.viewmodel.NoteListViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-class NoteListFragment : Fragment(), NoteListContract.View, NoteItemListener {
+@AndroidEntryPoint
+class NoteListFragment : Fragment(), NoteItemListener {
 
     private var _binding: FragmentNoteListBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var presenter: NoteListContract.Presenter
+    private val viewModel : NoteListViewModel by viewModels()
     private lateinit var notesAdapter: NotesAdapter
 
     override fun onCreateView(
@@ -33,8 +37,6 @@ class NoteListFragment : Fragment(), NoteListContract.View, NoteItemListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        presenter = NoteListPresenter(this, NotesRepository())
-
         notesAdapter = NotesAdapter(listOf(), this)
         binding.notesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.notesRecyclerView.adapter = notesAdapter
@@ -45,26 +47,22 @@ class NoteListFragment : Fragment(), NoteListContract.View, NoteItemListener {
             )
         }
 
-        presenter.loadNotes()
+        observeViewModel()
+        viewModel.loadNotes()
     }
 
-    override fun onResume() {
-        super.onResume()
-        presenter.loadNotes()
-    }
+    private fun observeViewModel() {
+        viewModel.notes.observe(viewLifecycleOwner) { notes ->
+            notesAdapter.refreshData(notes)
+        }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-        presenter.onDestroy()
-    }
+        viewModel.success.observe(viewLifecycleOwner) { message ->
+            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        }
 
-    override fun showNotes(notes: List<Note>) {
-        notesAdapter.refreshData(notes)
-    }
-
-    override fun showError(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        viewModel.error.observe(viewLifecycleOwner) { error ->
+            Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onNoteClicked(note: Note) {
@@ -80,11 +78,14 @@ class NoteListFragment : Fragment(), NoteListContract.View, NoteItemListener {
     }
 
     override fun onNoteDeleteRequested(note: Note) {
-        presenter.deleteNote(note)
+        note.id?.let { id ->
+            viewModel.deleteNote(id)
+        }
     }
 
-    override fun showSuccess() {
-        Toast.makeText(requireContext(), "Note Deleted", Toast.LENGTH_SHORT).show()
-        findNavController().navigateUp()
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
+
 }
