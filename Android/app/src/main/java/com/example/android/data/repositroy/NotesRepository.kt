@@ -1,7 +1,7 @@
-package com.example.android.data
+package com.example.android.data.repositroy
 
+import com.example.android.data.model.Note
 import com.example.android.data.remote.ApiClient
-import com.example.android.model.Note
 import retrofit2.Call
 
 class NotesRepository {
