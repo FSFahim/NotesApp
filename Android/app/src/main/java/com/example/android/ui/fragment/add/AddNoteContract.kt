@@ -1,6 +1,6 @@
-package com.example.android.ui.add
+package com.example.android.ui.fragment.add
 
-import com.example.android.model.Note
+import com.example.android.data.model.Note
 
 interface AddNoteContract {
     interface View {

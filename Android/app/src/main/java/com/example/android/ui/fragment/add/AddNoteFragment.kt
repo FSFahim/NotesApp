@@ -1,4 +1,4 @@
-package com.example.android.ui.add
+package com.example.android.ui.fragment.add
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.android.data.NotesRepository
+import androidx.navigation.fragment.findNavController
+import com.example.android.data.repository.NotesRepository
 import com.example.android.databinding.FragmentAddNoteBinding
-import com.example.android.model.Note
+import com.example.android.data.model.Note
 
 class AddNoteFragment : Fragment(), AddNoteContract.View {
 
@@ -46,7 +47,7 @@ class AddNoteFragment : Fragment(), AddNoteContract.View {
 
     override fun showSuccess() {
         Toast.makeText(requireContext(), "Note Saved", Toast.LENGTH_SHORT).show()
-        requireActivity().onBackPressedDispatcher.onBackPressed()
+        findNavController().navigateUp()
     }
 
     override fun showError(message: String) {

@@ -1,7 +1,7 @@
-package com.example.android.ui.notelist
+package com.example.android.ui.fragment.notelist
 
-import com.example.android.data.NotesRepository
-import com.example.android.model.Note
+import com.example.android.data.repository.NotesRepository
+import com.example.android.data.model.Note
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,6 +16,7 @@ class NoteListPresenter(
             repository.deleteNoteById(id).enqueue(object : Callback<Void> {
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
                     if (response.isSuccessful) {
+                        view?.showSuccess()
                         loadNotes()
                     } else {
                         view?.showError("Delete failed")

@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.R
-import com.example.android.model.Note
+import com.example.android.data.model.Note
 
 interface NoteItemListener {
     fun onNoteClicked(note: Note)

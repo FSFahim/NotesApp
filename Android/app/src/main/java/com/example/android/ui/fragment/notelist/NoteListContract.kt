@@ -1,11 +1,12 @@
-package com.example.android.ui.notelist
+package com.example.android.ui.fragment.notelist
 
-import com.example.android.model.Note
+import com.example.android.data.model.Note
 
 interface NoteListContract {
     interface View {
         fun showNotes(notes: List<Note>)
         fun showError(message: String)
+        fun showSuccess()
     }
 
     interface Presenter {
