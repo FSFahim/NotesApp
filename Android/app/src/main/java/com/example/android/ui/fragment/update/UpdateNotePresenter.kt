@@ -1,7 +1,7 @@
-package com.example.android.ui.update
+package com.example.android.ui.fragment.update
 
-import com.example.android.data.NotesRepository
-import com.example.android.model.Note
+import com.example.android.data.repository.NotesRepository
+import com.example.android.data.model.Note
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

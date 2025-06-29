@@ -1,4 +1,4 @@
-package com.example.android.ui.view
+package com.example.android.ui.fragment.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import com.example.android.data.NotesRepository
+import com.example.android.data.repository.NotesRepository
 import com.example.android.databinding.FragmentViewNoteBinding
-import com.example.android.model.Note
+import com.example.android.data.model.Note
 
 class ViewNoteFragment : Fragment(), ViewNoteContract.View {
 
