@@ -5,14 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.android.domain.model.Note
-import com.example.android.data.repositroy.NotesRepositoryImpl
+import com.example.android.domain.usecase.GetNoteByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ViewNoteViewModel @Inject constructor(
-    private val repository: NotesRepositoryImpl
+    private val getNoteByIdUseCase: GetNoteByIdUseCase
 ) : ViewModel() {
 
     private val _note = MutableLiveData<Note>()
@@ -24,7 +24,7 @@ class ViewNoteViewModel @Inject constructor(
     fun loadNote(id: Int) {
         viewModelScope.launch {
             try {
-                val result = repository.getNoteById(id)
+                val result = getNoteByIdUseCase(id)
                 _note.value = result
             } catch (e: Exception) {
                 _error.value = "Note not found: ${e.localizedMessage}"

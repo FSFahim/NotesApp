@@ -5,14 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.android.domain.model.Note
-import com.example.android.data.repositroy.NotesRepositoryImpl
+import com.example.android.domain.usecase.AddNoteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class AddNoteViewModel @Inject constructor(
-    private val repository: NotesRepositoryImpl
+    private val addNoteUseCase : AddNoteUseCase
 ) : ViewModel() {
 
     private val _success = MutableLiveData<Boolean>()
@@ -24,7 +24,7 @@ class AddNoteViewModel @Inject constructor(
     fun saveNote(note: Note) {
         viewModelScope.launch {
             try {
-                repository.addNote(note)
+                addNoteUseCase(note)
                 _success.value = true
             } catch (e: Exception) {
                 _error.value = "Add note failed: ${e.localizedMessage}"

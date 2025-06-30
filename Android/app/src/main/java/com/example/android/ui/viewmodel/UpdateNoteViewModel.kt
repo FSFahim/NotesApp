@@ -5,14 +5,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.android.domain.model.Note
-import com.example.android.data.repositroy.NotesRepositoryImpl
+import com.example.android.domain.usecase.GetNoteByIdUseCase
+import com.example.android.domain.usecase.UpdateNoteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class UpdateNoteViewModel @Inject constructor(
-    private val repository: NotesRepositoryImpl
+    private val getNoteByIdUseCase: GetNoteByIdUseCase,
+    private val updateNoteUseCase: UpdateNoteUseCase
 ) : ViewModel() {
 
     private val _note = MutableLiveData<Note>()
@@ -27,7 +29,7 @@ class UpdateNoteViewModel @Inject constructor(
     fun loadNote(id: Int) {
         viewModelScope.launch {
             try {
-                val result = repository.getNoteById(id)
+                val result = getNoteByIdUseCase(id)
                 _note.value = result
             } catch (e: Exception) {
                 _error.value = "Failed to load note: ${e.localizedMessage}"
@@ -38,7 +40,7 @@ class UpdateNoteViewModel @Inject constructor(
     fun updateNote(note: Note) {
         viewModelScope.launch {
             try {
-                repository.updateNote(note.id!!, note)
+                updateNoteUseCase(note.id!!, note)
                 _success.value = true
             } catch (e: Exception) {
                 _error.value = "Update failed: ${e.localizedMessage}"
