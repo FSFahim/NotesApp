@@ -1,4 +1,4 @@
-package com.example.android.data.model
+package com.example.android.domain.model
 
 data class Note(
     val id:Int? = null,

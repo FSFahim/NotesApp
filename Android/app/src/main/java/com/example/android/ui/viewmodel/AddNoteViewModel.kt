@@ -4,15 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.android.data.model.Note
-import com.example.android.data.repositroy.NotesRepository
+import com.example.android.domain.model.Note
+import com.example.android.data.repositroy.NotesRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class AddNoteViewModel @Inject constructor(
-    private val repository: NotesRepository
+    private val repository: NotesRepositoryImpl
 ) : ViewModel() {
 
     private val _success = MutableLiveData<Boolean>()

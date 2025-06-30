@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.R
-import com.example.android.data.model.Note
+import com.example.android.domain.model.Note
 
 class NotesAdapter(
     private val listener: NoteItemListener
