@@ -13,7 +13,6 @@ import com.example.android.data.model.Note
 import com.example.android.databinding.FragmentNoteListBinding
 import com.example.android.ui.adapter.NoteItemListener
 import com.example.android.ui.adapter.NotesAdapter
-import com.example.android.ui.fragment.NoteListFragmentDirections
 import com.example.android.ui.viewmodel.NoteListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,7 +36,7 @@ class NoteListFragment : Fragment(), NoteItemListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        notesAdapter = NotesAdapter(listOf(), this)
+        notesAdapter = NotesAdapter(this)
         binding.notesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.notesRecyclerView.adapter = notesAdapter
 
@@ -53,7 +52,7 @@ class NoteListFragment : Fragment(), NoteItemListener {
 
     private fun observeViewModel() {
         viewModel.notes.observe(viewLifecycleOwner) { notes ->
-            notesAdapter.refreshData(notes)
+            notesAdapter.submitList(notes)
         }
 
         viewModel.success.observe(viewLifecycleOwner) { message ->

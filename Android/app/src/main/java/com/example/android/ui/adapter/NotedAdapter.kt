@@ -5,23 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.R
 import com.example.android.data.model.Note
 
-interface NoteItemListener {
-    fun onNoteClicked(note: Note)
-    fun onNoteEditRequested(note: Note)
-    fun onNoteDeleteRequested(note: Note)
-}
-
 class NotesAdapter(
-    private var notes: List<Note>,
     private val listener: NoteItemListener
-): RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
-
-    //val db : NotesDatabaseHelper = NotesDatabaseHelper(context)
-
+): ListAdapter<Note, NotesAdapter.NoteViewHolder>(NoteDiffCallback()) {
     class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val titleTextView : TextView = itemView.findViewById(R.id.titleTextView)
         val contentTextView : TextView = itemView.findViewById(R.id.contentTextView)
@@ -41,7 +32,7 @@ class NotesAdapter(
         holder: NoteViewHolder,
         position: Int
     ) {
-        val note = notes[position]
+        val note = getItem(position)
         holder.titleTextView.text = note.title
         holder.contentTextView.text = note.content
 
@@ -56,12 +47,5 @@ class NotesAdapter(
         holder.deleteButton.setOnClickListener {
             listener.onNoteDeleteRequested(note)
         }
-    }
-
-    override fun getItemCount(): Int = notes.size
-
-    fun refreshData(newNotes:List<Note>){
-        notes = newNotes
-        notifyDataSetChanged()
     }
 }

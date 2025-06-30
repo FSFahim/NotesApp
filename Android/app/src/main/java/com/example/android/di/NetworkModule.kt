@@ -44,5 +44,4 @@ object NetworkModule {
     @Singleton
     fun provideNotesApiService(retrofit: Retrofit): NotesApiService =
         retrofit.create(NotesApiService::class.java)
-
 }
