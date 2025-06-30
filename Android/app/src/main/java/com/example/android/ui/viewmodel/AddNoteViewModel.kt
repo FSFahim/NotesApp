@@ -27,7 +27,7 @@ class AddNoteViewModel @Inject constructor(
                 repository.addNote(note)
                 _success.value = true
             } catch (e: Exception) {
-                _error.value = "Error: ${e.localizedMessage}"
+                _error.value = "Add note failed: ${e.localizedMessage}"
             }
         }
     }
