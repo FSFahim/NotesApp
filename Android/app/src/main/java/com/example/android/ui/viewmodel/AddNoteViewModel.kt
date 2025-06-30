@@ -3,12 +3,11 @@ package com.example.android.ui.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.android.data.model.Note
 import com.example.android.data.repositroy.NotesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,18 +22,13 @@ class AddNoteViewModel @Inject constructor(
     val error: LiveData<String> = _error
 
     fun saveNote(note: Note) {
-        repository.addNote(note).enqueue(object : Callback<Void> {
-            override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                if (response.isSuccessful) {
-                    _success.value = true
-                } else {
-                    _error.value = "Failed to save note"
-                }
+        viewModelScope.launch {
+            try {
+                repository.addNote(note)
+                _success.value = true
+            } catch (e: Exception) {
+                _error.value = "Error: ${e.localizedMessage}"
             }
-
-            override fun onFailure(call: Call<Void>, t: Throwable) {
-                _error.value = "Error: ${t.localizedMessage}"
-            }
-        })
+        }
     }
 }

@@ -12,17 +12,17 @@ import retrofit2.http.Path
 interface NotesApiService {
 
     @GET("/notes")
-    fun getAllNotes(): Call<List<Note>>
+    suspend fun getAllNotes(): List<Note>
 
     @POST("/Notes")
-    fun addNote(@Body note: Note): Call<Void>
+    suspend fun addNote(@Body note: Note): Void
 
     @PUT("/Notes/{id}")
-    fun updateNote(@Path("id") id:Int, @Body note: Note): Call<Void>
+    suspend fun updateNote(@Path("id") id:Int, @Body note: Note): Void
 
     @DELETE("/notes/{id}")
-    fun deleteNote(@Path("id") id:Int): Call<Void>
+    suspend fun deleteNote(@Path("id") id:Int): Void
 
     @GET("/notes/{id}")
-    fun getNoteById(@Path("id") id:Int): Call<Note>
+    suspend fun getNoteById(@Path("id") id:Int): Note
 }
