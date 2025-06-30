@@ -6,7 +6,7 @@
     app:startDestination="@id/noteListFragment">
     <fragment
         android:id="@+id/noteListFragment"
-        android:name="com.example.android.ui.fragment.notelist.NoteListFragment"
+        android:name="com.example.android.ui.fragment.NoteListFragment"
         android:label="NoteListFragment" >
         <action
             android:id="@+id/action_noteListFragment_to_viewNoteFragment"
@@ -20,12 +20,12 @@
     </fragment>
     <fragment
         android:id="@+id/addNoteFragment"
-        android:name="com.example.android.ui.fragment.add.AddNoteFragment"
+        android:name="com.example.android.ui.fragment.AddNoteFragment"
         android:label="fragment_add_note"
         tools:layout="@layout/fragment_add_note" />
     <fragment
         android:id="@+id/updateNoteFragment"
-        android:name="com.example.android.ui.fragment.update.UpdateNoteFragment"
+        android:name="com.example.android.ui.fragment.UpdateNoteFragment"
         android:label="fragment_update_note"
         tools:layout="@layout/fragment_update_note" >
         <argument
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/viewNoteFragment"
-        android:name="com.example.android.ui.fragment.view.ViewNoteFragment"
+        android:name="com.example.android.ui.fragment.ViewNoteFragment"
         android:label="fragment_view_note"
         tools:layout="@layout/fragment_view_note" >
         <argument

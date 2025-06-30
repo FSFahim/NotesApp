@@ -1,4 +1,4 @@
-package com.example.android.ui.fragment.add
+package com.example.android.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,17 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.android.data.repositroy.NotesRepository
-import com.example.android.databinding.FragmentAddNoteBinding
 import com.example.android.data.model.Note
+import com.example.android.databinding.FragmentAddNoteBinding
+import com.example.android.ui.viewmodel.AddNoteViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-class AddNoteFragment : Fragment(), AddNoteContract.View {
+@AndroidEntryPoint
+class AddNoteFragment : Fragment() {
 
     private var _binding: FragmentAddNoteBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var presenter: AddNoteContract.Presenter
+    private val viewModel: AddNoteViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,8 +32,6 @@ class AddNoteFragment : Fragment(), AddNoteContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        presenter = AddNotePresenter(this, NotesRepository())
-
         binding.saveButton.setOnClickListener {
             val title = binding.titleEditText.text.toString()
             val content = binding.contentEditText.text.toString()
@@ -41,22 +42,27 @@ class AddNoteFragment : Fragment(), AddNoteContract.View {
             }
 
             val note = Note(title = title, content = content)
-            presenter.saveNote(note)
+            viewModel.saveNote(note)
         }
+
+        observeViewModel()
     }
 
-    override fun showSuccess() {
-        Toast.makeText(requireContext(), "Note Saved", Toast.LENGTH_SHORT).show()
-        findNavController().navigateUp()
-    }
+    private fun observeViewModel() {
+        viewModel.success.observe(viewLifecycleOwner) { saved ->
+            if (saved) {
+                Toast.makeText(requireContext(), "Note Saved", Toast.LENGTH_SHORT).show()
+                findNavController().navigateUp()
+            }
+        }
 
-    override fun showError(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        viewModel.error.observe(viewLifecycleOwner) { errorMessage ->
+            Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        presenter.onDestroy()
     }
 }
