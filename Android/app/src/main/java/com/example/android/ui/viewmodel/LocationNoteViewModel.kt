@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.android.data.model.LocationNote
-import com.example.android.domain.repository.LocationNoteRepository
+import com.example.android.domain.repository.LocationNotesRepository
 import com.example.android.domain.usecase.InsertLocationNoteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class LocationNoteViewModel @Inject constructor(
     private val insertLocationNoteUseCase: InsertLocationNoteUseCase,
-    private val locationNoteRepository: LocationNoteRepository
+    private val locationNotesRepository: LocationNotesRepository
 ) : ViewModel(){
 
     private val _locationNotes = MutableLiveData<List<LocationNote>>()
@@ -29,7 +29,7 @@ class LocationNoteViewModel @Inject constructor(
     fun loadSavedLocation(){
         viewModelScope.launch {
             try {
-                _locationNotes.value = locationNoteRepository.getAllNotes()
+                _locationNotes.value = locationNotesRepository.getAllNotes()
             }catch (e: Exception){
                 _error.value = "Failed to load saved locations : ${e.localizedMessage}"
             }

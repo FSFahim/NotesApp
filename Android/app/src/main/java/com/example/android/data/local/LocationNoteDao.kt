@@ -9,8 +9,8 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface LocationNoteDao {
     @Insert
-    suspend fun insertNote(locationNote: LocationNote)
+    suspend fun insertLocationNote(locationNote: LocationNote)
 
     @Query("SELECT * FROM location_notes ORDER BY timeStamp DESC")
-    suspend fun getAll(): Flow<List<LocationNote>>
+    fun getAllLocationNotes(): Flow<List<LocationNote>>
 }

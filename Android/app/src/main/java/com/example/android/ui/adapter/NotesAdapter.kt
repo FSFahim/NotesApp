@@ -11,7 +11,7 @@ import com.example.android.R
 import com.example.android.data.model.Note
 
 class NotesAdapter(
-    private val listener: NoteItemListener
+    private val listener: NotesItemListener
 ): ListAdapter<Note, NotesAdapter.NoteViewHolder>(NoteDiffCallback()) {
     class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val titleTextView : TextView = itemView.findViewById(R.id.titleTextView)

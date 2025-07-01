@@ -11,13 +11,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android.data.model.Note
 import com.example.android.databinding.FragmentNoteListBinding
-import com.example.android.ui.adapter.NoteItemListener
+import com.example.android.ui.adapter.NotesItemListener
 import com.example.android.ui.adapter.NotesAdapter
 import com.example.android.ui.viewmodel.NoteListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class NoteListFragment : Fragment(), NoteItemListener {
+class NotesListFragment : Fragment(), NotesItemListener {
 
     private var _binding: FragmentNoteListBinding? = null
     private val binding get() = _binding!!
