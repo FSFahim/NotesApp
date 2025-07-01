@@ -1,6 +1,6 @@
 package com.example.android.domain.repository
 
-import com.example.android.domain.model.Note
+import com.example.android.data.model.Note
 
 interface NotesRepository {
     suspend fun getAllNotes() : List<Note>

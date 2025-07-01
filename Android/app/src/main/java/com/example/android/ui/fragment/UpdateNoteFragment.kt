@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.android.domain.model.Note
+import com.example.android.data.model.Note
 import com.example.android.databinding.FragmentUpdateNoteBinding
 import com.example.android.ui.viewmodel.UpdateNoteViewModel
 import dagger.hilt.android.AndroidEntryPoint

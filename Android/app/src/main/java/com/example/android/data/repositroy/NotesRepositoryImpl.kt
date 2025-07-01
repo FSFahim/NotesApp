@@ -1,6 +1,6 @@
 package com.example.android.data.repositroy
 
-import com.example.android.domain.model.Note
+import com.example.android.data.model.Note
 import com.example.android.data.remote.NotesApiService
 import com.example.android.domain.repository.NotesRepository
 import javax.inject.Inject
