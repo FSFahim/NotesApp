@@ -1,5 +1,6 @@
 package com.example.android.data.remote
 
+import com.example.android.data.model.LocationNote
 import com.example.android.data.model.Note
 import retrofit2.Response
 import retrofit2.http.Body
@@ -25,4 +26,8 @@ interface NotesApiService {
 
     @GET("/notes/{id}")
     suspend fun getNoteById(@Path("id") id:Int): Response<Note>
+
+    @POST("/notes/upload")
+    suspend fun uploadLocationNotes(@Body notes: List<LocationNote>): Response<Unit>
+
 }

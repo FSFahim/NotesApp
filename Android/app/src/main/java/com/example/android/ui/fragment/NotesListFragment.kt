@@ -42,7 +42,13 @@ class NotesListFragment : Fragment(), NotesItemListener {
 
         binding.addButton.setOnClickListener {
             findNavController().navigate(
-                NoteListFragmentDirections.actionNoteListFragmentToAddNoteFragment()
+                NotesListFragmentDirections.actionNoteListFragmentToAddNoteFragment()
+            )
+        }
+
+        binding.locationNotesButton.setOnClickListener {
+            findNavController().navigate(
+                NotesListFragmentDirections.actionNoteListFragmentToLocationNoteListFragment()
             )
         }
 
@@ -65,13 +71,13 @@ class NotesListFragment : Fragment(), NotesItemListener {
     }
 
     override fun onNoteClicked(note: Note) {
-        val action = NoteListFragmentDirections
+        val action = NotesListFragmentDirections
             .actionNoteListFragmentToViewNoteFragment(note.id!!)
         findNavController().navigate(action)
     }
 
     override fun onNoteEditRequested(note: Note) {
-        val action = NoteListFragmentDirections
+        val action = NotesListFragmentDirections
             .actionNoteListFragmentToUpdateNoteFragment(note.id!!)
         findNavController().navigate(action)
     }

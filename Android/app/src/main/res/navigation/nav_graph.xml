@@ -5,6 +5,12 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/noteListFragment">
     <fragment
+        android:id="@+id/locationNoteListFragment"
+        android:name="com.example.android.ui.fragment.LocationNoteListFragment"
+        android:label="Location Notes"
+        tools:layout="@layout/fragment_location_note_list" />
+
+    <fragment
         android:id="@+id/noteListFragment"
         android:name="com.example.android.ui.fragment.NotesListFragment"
         android:label="NoteListFragment" >
@@ -17,6 +23,9 @@
         <action
             android:id="@+id/action_noteListFragment_to_updateNoteFragment"
             app:destination="@id/updateNoteFragment" />
+        <action
+            android:id="@+id/action_noteListFragment_to_locationNoteListFragment"
+            app:destination="@id/locationNoteListFragment" />
     </fragment>
     <fragment
         android:id="@+id/addNoteFragment"

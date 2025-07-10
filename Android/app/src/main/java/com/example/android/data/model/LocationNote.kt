@@ -8,6 +8,5 @@ import androidx.room.PrimaryKey
 data class LocationNote(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val title: String,
-    val content: String,
-    val timeStamp : Long = System.currentTimeMillis()
+    val content: String
 )

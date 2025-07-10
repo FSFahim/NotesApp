@@ -68,6 +68,8 @@ dependencies {
 
     // Dagger Hilt
     implementation(libs.hilt.android)
+    implementation(libs.androidx.legacy.support.v4)
+    implementation(libs.androidx.fragment.ktx)
     kapt(libs.hilt.compiler)
 
     //Coroutine

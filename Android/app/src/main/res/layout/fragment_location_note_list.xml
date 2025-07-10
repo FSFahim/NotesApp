@@ -4,27 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.MainActivity">
+    tools:context=".ui.fragment.LocationNoteListFragment">
 
+    <!-- Heading -->
     <TextView
-        android:id="@+id/notesHeading"
+        android:id="@+id/locationNotesHeading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="50dp"
-        android:fontFamily="@font/poppins"
-        android:text="@string/notes"
         android:layout_marginStart="18dp"
+        android:text="Location Notes"
+        android:fontFamily="@font/poppins"
         android:textColor="@color/navy"
-        android:textSize="24sp"/>
+        android:textSize="24sp" />
 
+    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/notesRecyclerView"
+        android:id="@+id/locationNotesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="70dp"
+        android:layout_above="@+id/buttonContainer"
+        android:layout_below="@id/locationNotesHeading"
         android:padding="16dp" />
-
 
     <!-- Bottom Button Container -->
     <LinearLayout
@@ -40,23 +42,23 @@
 
         <!-- Fetch Location Button -->
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/addButton"
+            android:id="@+id/fetchLocationButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginEnd="8dp"
-            android:text="Add Notes"
+            android:text="Fetch Location"
             android:backgroundTint="@color/navy"
             android:textColor="@color/white" />
 
         <!-- Upload Button -->
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/locationNotesButton"
+            android:id="@+id/uploadNotesButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginStart="8dp"
-            android:text="Location Notes"
+            android:text="Upload Notes"
             android:backgroundTint="@color/navy"
             android:textColor="@color/white" />
     </LinearLayout>
